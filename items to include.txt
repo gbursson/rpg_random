@@ -1,0 +1,22 @@
+Theme
+Goal
+Story Hook
+Plot
+Climax
+General Settings
+Specific Setting I
+Specific Setting II
+Main Villain
+Minor Villain I
+Minor Villain II
+Ally/Neutral
+Monster Encounter [with "None" option]
+Character Encounter  [with "None" option]
+Deathtrap
+Chase
+Omen/Prophecy
+Secret Weakness
+Special Condition
+Moral Quandry
+Red Herring
+Cruel Trick
