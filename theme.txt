@@ -1,0 +1,7 @@
+Comedy
+Drama
+Thriller
+Horror
+Action
+Hack n' Slash
+War
