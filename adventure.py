@@ -1,8 +1,13 @@
-import random
 import sqlite3 as db
 
 conn = db.connect('adventures.sqlite')
 c = conn.cursor()
-result = c.execute("SELECT * from THEMES")
-theme = random.choice(result.fetchall())
-print(theme[1], '\n', theme[2])
+
+source = {"themes": "Głowny temat", "villains": "Przeciwnik", "minor_villains": "Pomocnik")}
+
+for tableName[0] in source:
+    query = "SELECT * FROM {0}".format(tableName[0])
+# debug
+queryResult = c.execute(query)
+tableName = random.choice(queryResult.fetchall())
+print(tableName[0])
