@@ -8,9 +8,7 @@ import collections
 dbconn = db.connect('adv.sqlite')
 c = dbconn.cursor()
 
-source = {}
-
-def createDictionary(tableName):
+def createDictionary(tableName='mainseq_pl'):
     query = "SELECT * FROM {0} ORDER BY seq DESC".format(tableName)
     queryResult = c.execute(query)
     index = queryResult.fetchall()
@@ -19,8 +17,11 @@ def createDictionary(tableName):
     for i in index:
         keys = keys + [i[0]]
         values = values + [i[1]]
-    source = dict(zip(keys, values))
-    source = collections.OrderedDict(sorted(source.items()))
+    dictionary = dict(zip(keys, values))
+    dictionary = collections.OrderedDict(sorted(dictionary.items()))
+    return dictionary
+
+source = createDictionary('mainseq_pl')
 
 def createAdventure():
     for dictIndex in source:
@@ -41,4 +42,4 @@ def createAdventure():
 
 createAdventure()
 
-#conn.close()
+dbconn.close()
