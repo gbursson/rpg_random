@@ -3,7 +3,6 @@
 import random
 import sqlite3 as db
 import collections
-import pprint
 
 dbconn = db.connect('adv.sqlite')
 c = dbconn.cursor()
@@ -37,6 +36,6 @@ def createAdventure():
 
 htmlFile = open("adv.html", mode="w+")
 html = str(createAdventure())
-print(html)
+#print(html)
 htmlFile.write(html)
 dbconn.close()
