@@ -33,13 +33,12 @@ def createAdventure():
         category_name = dictCategoryName
         name = item[0]
         desc = item[1]
-        htmlOutput = category_name + "<br><b>{0}</b>: ".format(name) + "<br><b>Opis</b>: " + "{0}".format(desc)
-        
+        htmlOutput = category_name + "<br><b>{0}</b>: ".format(name)
+        htmlOutput = htmlOutput + "<br><b>Opis</b>: " + "{0}".format(desc)
         return htmlOutput
 
-htmlFile = open("adv.html", mode="r+")
+htmlFile = open("adv.html", mode="w+")
 output = createAdventure()
 print(output.encode('utf-8'))
 htmlFile.write(output.encode('utf-8'))
-
 dbconn.close()
