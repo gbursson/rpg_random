@@ -1,6 +1,6 @@
 # coding=utf-8
 
-#import random
+import random
 import sqlite3 as db
 import collections
 
@@ -8,6 +8,7 @@ import collections
 dbconn = db.connect('adv.sqlite')
 c = dbconn.cursor()
 
+source = {}
 
 def createDictionary(tableName):
     query = "SELECT * FROM {0} ORDER BY seq DESC".format(tableName)
@@ -20,14 +21,12 @@ def createDictionary(tableName):
         values = values + [i[1]]
     source = dict(zip(keys, values))
     source = collections.OrderedDict(sorted(source.items()))
-    print(source) #debug
 
-#createDictionary("mainseq_pl")
-
-'''
 def createAdventure():
     for dictIndex in source:
-        query = "SELECT * FROM {0}".format(dictIndex)
+        query = "SELECT * FROM {0}".format(dictIndex[1])
+        print(query)
+        '''
         queryResult = c.execute(query)
         item = random.choice(queryResult.fetchall())
         name = item[0]
@@ -40,6 +39,6 @@ def createAdventure():
     # htmlFile.write(htmlOutput)
 '''
 
-
+createAdventure()
 
 #conn.close()
