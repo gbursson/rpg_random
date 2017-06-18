@@ -21,8 +21,6 @@ def createDictionary(tableName='mainseq_pl'):
     dictionary = collections.OrderedDict(sorted(dictionary.items()))
     return dictionary
 
-
-
 source = createDictionary('mainseq_pl')
 
 def createAdventure():
@@ -35,10 +33,10 @@ def createAdventure():
         desc = item[1]
         htmlOutput = category_name + "<br><b>{0}</b>: ".format(name)
         htmlOutput = htmlOutput + "<br><b>Opis</b>: " + "{0}".format(desc)
-        return htmlOutput
+        print(htmlOutput)
 
 htmlFile = open("adv.html", mode="w+")
-output = createAdventure()
-print(output.encode('utf-8'))
-htmlFile.write(output.encode('utf-8'))
+html = str(createAdventure())
+print(html)
+htmlFile.write(html)
 dbconn.close()
