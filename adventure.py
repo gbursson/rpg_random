@@ -1,9 +1,9 @@
-# coding=utf-8
+# -*- coding: utf-8 -*-
 
 import random
 import sqlite3 as db
 import collections
-
+import pprint
 
 dbconn = db.connect('adv.sqlite')
 c = dbconn.cursor()
@@ -21,25 +21,25 @@ def createDictionary(tableName='mainseq_pl'):
     dictionary = collections.OrderedDict(sorted(dictionary.items()))
     return dictionary
 
+
+
 source = createDictionary('mainseq_pl')
 
 def createAdventure():
-    for dictIndex in source:
-        query = "SELECT * FROM {0}".format(dictIndex[1])
-        print(query)
-        '''
+    for dictIndex, dictCategoryName in source.items():
+        query = "SELECT * FROM {0}".format(dictIndex)
         queryResult = c.execute(query)
         item = random.choice(queryResult.fetchall())
+        category_name = dictCategoryName
         name = item[0]
         desc = item[1]
-        htmlOutput = "<b>{0}</b>: ".format(source[dictIndex]) + name
-        htmlOutput = htmlOutput + "<br><b>Opis</b>: " + "{0}".format(desc) + ""
+        htmlOutput = category_name + "<br><b>{0}</b>: ".format(name) + "<br><b>Opis</b>: " + "{0}".format(desc)
+        
+        return htmlOutput
 
-
-    # htmlFile = open("adv.html", encoding="utf-8", mode="r+")
-    # htmlFile.write(htmlOutput)
-'''
-
-createAdventure()
+htmlFile = open("adv.html", mode="r+")
+output = createAdventure()
+print(output.encode('utf-8'))
+htmlFile.write(output.encode('utf-8'))
 
 dbconn.close()
