@@ -1,20 +1,30 @@
 # coding=utf-8
 
-import random
+#import random
 import sqlite3 as db
+import collections
 
-#conn = db.connect('adventures.sqlite')
-#c = conn.cursor()
 
-'''
+dbconn = db.connect('adv.sqlite')
+c = dbconn.cursor()
+
+
 def createDictionary(tableName):
-    query = "SELECT * FROM {0}".format(tableName)
+    query = "SELECT * FROM {0} ORDER BY seq DESC".format(tableName)
     queryResult = c.execute(query)
     index = queryResult.fetchall()
+    keys = []
+    values = []
     for i in index:
-        source = dict("{0}".format(i[1])="{1}".format(i[2]))
-        print(source)
+        keys = keys + [i[0]]
+        values = values + [i[1]]
+    source = dict(zip(keys, values))
+    source = collections.OrderedDict(sorted(source.items()))
+    print(source) #debug
 
+#createDictionary("mainseq_pl")
+
+'''
 def createAdventure():
     for dictIndex in source:
         query = "SELECT * FROM {0}".format(dictIndex)
@@ -30,5 +40,6 @@ def createAdventure():
     # htmlFile.write(htmlOutput)
 '''
 
-print("Zażółciła gęślą jaźń")
+
+
 #conn.close()
