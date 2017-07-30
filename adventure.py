@@ -8,7 +8,7 @@ dbconn = db.connect('adv.sqlite')
 c = dbconn.cursor()
 
 
-def create_dictionary(table_name: object = 'mainseq_pl') -> object:
+def create_dictionary(table_name = 'mainseq_pl'):
     query = "SELECT * FROM {0} ORDER BY seq DESC".format(table_name)
     queryResult = c.execute(query)
     index = queryResult.fetchall()
@@ -19,12 +19,13 @@ def create_dictionary(table_name: object = 'mainseq_pl') -> object:
         values = values + [i[1]]
     dictionary = dict(zip(keys, values))
     dictionary = collections.OrderedDict(sorted(dictionary.items()))
+    print(dictionary)
     return dictionary
 
 
 source = create_dictionary('mainseq_pl')
 
-htmlFile = open("adv.html", mode="w+")
+html_file = open("adv.html", mode="w+")
 
 
 def createAdventure():
@@ -42,11 +43,10 @@ def createAdventure():
 
         html_output = category_name + "<br><b>{0}</b>: ".format(name)
         html_output = html_output + "<br><b>Opis</b>: " + "{0}".format(desc)
-        # print(html_output)
+        print(html_output)
         # htmlFile.write(html_output)
 
 
 # html = str(createAdventure())
 # print(html)
-# htmlFile.write(html)
 dbconn.close()
