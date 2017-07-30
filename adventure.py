@@ -7,8 +7,9 @@ import collections
 dbconn = db.connect('adv.sqlite')
 c = dbconn.cursor()
 
-def createDictionary(tableName='mainseq_pl'):
-    query = "SELECT * FROM {0} ORDER BY seq DESC".format(tableName)
+
+def create_dictionary(table_name: object = 'mainseq_pl') -> object:
+    query = "SELECT * FROM {0} ORDER BY seq DESC".format(table_name)
     queryResult = c.execute(query)
     index = queryResult.fetchall()
     keys = []
@@ -20,9 +21,14 @@ def createDictionary(tableName='mainseq_pl'):
     dictionary = collections.OrderedDict(sorted(dictionary.items()))
     return dictionary
 
-source = createDictionary('mainseq_pl')
+
+source = create_dictionary('mainseq_pl')
+
+htmlFile = open("adv.html", mode="w+")
+
 
 def createAdventure():
+    html_output = ""
     for dictIndex, dictCategoryName in source.items():
         query = "SELECT * FROM {0}".format(dictIndex)
         queryResult = c.execute(query)
@@ -30,12 +36,17 @@ def createAdventure():
         category_name = dictCategoryName
         name = item[0]
         desc = item[1]
-        htmlOutput = category_name + "<br><b>{0}</b>: ".format(name)
-        htmlOutput = htmlOutput + "<br><b>Opis</b>: " + "{0}".format(desc)
-        print(htmlOutput)
 
-htmlFile = open("adv.html", mode="w+")
-html = str(createAdventure())
-#print(html)
-htmlFile.write(html)
+        print("DESC: ", desc)  # debug
+        print("NAME: ", name)  # debug
+
+        html_output = category_name + "<br><b>{0}</b>: ".format(name)
+        html_output = html_output + "<br><b>Opis</b>: " + "{0}".format(desc)
+        # print(html_output)
+        # htmlFile.write(html_output)
+
+
+# html = str(createAdventure())
+# print(html)
+# htmlFile.write(html)
 dbconn.close()
