@@ -8,7 +8,7 @@ dbconn = db.connect('adv.sqlite')
 c = dbconn.cursor()
 
 
-def create_dictionary(table_name = 'mainseq_pl'):
+def create_dictionary(table_name='mainseq_pl'):
     query = "SELECT * FROM {0} ORDER BY seq DESC".format(table_name)
     queryResult = c.execute(query)
     index = queryResult.fetchall()
@@ -17,8 +17,7 @@ def create_dictionary(table_name = 'mainseq_pl'):
     for i in index:
         keys = keys + [i[0]]
         values = values + [i[1]]
-    dictionary = dict(zip(keys, values))
-    dictionary = collections.OrderedDict(sorted(dictionary.items()))
+    dictionary = collections.OrderedDict(sorted(dict(zip(keys, values)).items()))
     print(dictionary)
     return dictionary
 
