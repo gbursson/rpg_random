@@ -24,7 +24,7 @@ def create_dictionary(table_name='mainseq_pl'):
 
 source = create_dictionary('mainseq_pl')
 
-html_file = open("adv.html", mode="w+")
+html_file = open("adv.html", mode="a")
 
 
 def createAdventure():
